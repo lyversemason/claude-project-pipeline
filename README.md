@@ -33,6 +33,9 @@ work keeps each step honest:
 - **Follow my lead.** I think out loud by asking questions, so the skill answers what I asked,
   briefly, asks at most one or two questions at a time and doesn't jump ahead to tech stacks.
 - **Honest verdicts.** If an idea is bad, or already exists, it says so and why.
+- **Best practices, explained.** `/scope` proposes best coding practices by default and explains
+  why each one exists using the project at hand. If I suggest something that goes against one,
+  it has to tell me what goes wrong and the better way; I still make the call.
 - **State lives in plain files, not in the chat.** Each project gets a `PLAN.md` with my
   original idea in my own words (never overwritten), decisions, open questions and a
   "Where we left off" section, so any new chat can pick it up. Every idea, even a dropped

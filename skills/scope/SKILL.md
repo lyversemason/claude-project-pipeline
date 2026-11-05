@@ -42,6 +42,13 @@ don't apply. Each becomes a section in PLAN.md.
 - One section at a time. Give your proposal in a few lines, with the tradeoff in plain language,
   then let Mason decide. Ask at most one or two questions at once.
 - Mason can steer by asking questions, same as in /ideas. Follow his lead.
+- **Best practices by default, and teach them.** Every proposal follows best coding practices
+  for this kind of project (security, testing, structure, data safety, accessibility, whatever
+  applies). Say which practice you're following and *why* it exists, in plain language, using
+  this project as the example. The scope is also how Mason learns them.
+- **Flag it when Mason's idea goes against one.** You must tell him: name the practice, what
+  goes wrong without it, and the better way. Then he decides. If he still wants his way, write
+  it in Decisions as his choice, with the practice it skips.
 - Write decisions into PLAN.md as they're made (`## Decisions (<date>)`), keep undecided items in
   `## Open questions`, and keep his original "The idea" section untouched.
 - Stop when he's had enough; don't push to finish in one sitting.
