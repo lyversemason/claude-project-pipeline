@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: full-nelson-check
+expected_outcome: |
+  A scope-check report that holds the Full Nelson scope against the skill's references: each of
+  the fifteen scope sections marked present, thin or missing; production-bar items met, planned
+  or absent for a large, level-3 project; security controls vs. level; testing and break-it
+  coverage; build-plan sizing; overplanning; then a letter grade with a visible rubric, three
+  fixes first, and specific strengths. Blunt, no unsupported praise. PLAN.md unchanged.

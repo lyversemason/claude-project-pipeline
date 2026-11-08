@@ -1,0 +1,8 @@
+schema_version: "1.1"
+name: hand-signals-opening
+expected_outcome: |
+  The agent reads the Hand Signals PLAN.md, says in two or three lines where it stands and what's
+  next (the three open questions from 2026-11-04), then runs the first three scope sections in
+  order, one at a time with Mason's assumed yes between them: the problem and finished picture, the problems inside the project with a lens
+  each, and the project kind / security level / bar. It teaches the why in plain language, asks
+  at most two questions, decides nothing for Mason, writes no code, and stops to wait.
