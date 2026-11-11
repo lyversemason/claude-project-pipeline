@@ -198,7 +198,24 @@ When every section that applies is decided and Mason agrees:
      effort, checkpoint contents, device checks), symlinked into `~/.claude/skills/<name>`.
      This is the XO Mason talks to during the build. The skill-creator skill is for improving it
      later, not for making it.
-   - `.gitignore` covering CLAUDE.local.md and anything the hard rules say stays private.
+   - `.gitignore` covering CLAUDE.local.md and anything the hard rules say stays private. Ignore
+     private things by folder or exact name, not by file type: a blanket `*.png` also blocks the
+     app's icon.
+   Rules for the kit, learned the hard way:
+   - **One source of truth.** The skill points at PLAN.md for checkpoints, spike questions and the
+     done checklist; it doesn't restate them. Two copies drift the moment step 0 changes the plan.
+   - **Same numbers everywhere.** AGENTS.md's safety rules keep PLAN.md section 8's numbering. If
+     the list needs to change, change the plan first, then AGENTS.md, then anything that cites a
+     rule by number (CLAUDE.local.md).
+   - **Rules, not spec.** AGENTS.md holds what every agent must obey on every step. Test cases,
+     magic strings and step details live in PLAN.md section 10 or the step report.
+   - **No private names in tracked files.** Hard-rule examples say "private legal, medical and
+     family matters", never the name of a private project, claim or person. Check every tracked
+     file against the PRIVATE memories before the first push; history is never rewritten.
+   - **Commands are copy-ready.** No `<effort>` placeholders inside a command block; put the real
+     values in, and the rule for choosing them beside it.
+   - **Touch only this project.** Never remove or change another project's skill link, files or
+     memory, even if this project replaces it. Say what should happen to the old one; Mason does it.
 3. Set `Status: SCOPED. Ready to build when Mason says build (cd ~/Projects/<name> && claude, then /<name>).`
 4. Save (step 5), and finish the textbook chapter's "What I'd say in an interview" section.
 5. Say so in one line. Building is a separate step he starts himself.
@@ -231,7 +248,8 @@ it's met", so the repo is evidence, not just the plan. Then read every reference
   | F | No plan, or the plan breaks a hard rule in `~/.claude/CLAUDE.md`. |
 
   Name the grade, then the rubric line it matched and the evidence (file and section) for each
-  claim. "The three things to fix first" are exactly three; more goes under "Also".
+  claim. Verify before you write: a claim about the repo or its history (`grep`, `git log`) is
+  checked, not inferred from the plan. One wrong finding costs the report its credibility. "The three things to fix first" are exactly three; more goes under "Also".
 
 Write it to `~/Projects/<name>/docs/scope-check-<date>.md`, then offer to turn the fixes into
 scope sessions. Don't change PLAN.md in audit mode.

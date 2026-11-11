@@ -30,9 +30,13 @@ Project size: **<small | medium | large>** (PLAN.md → Build plan). Security le
    this checkpoint will cover (each small and testable), then anything you need from him. Then
    **wait for his OK**. He may change the list.
 
-<!-- If the scope calls for a spike (riskiest piece first, scored with numbers), describe it here:
-## The spike (step 0)
-What it must answer, how each number is measured, what decision it feeds. -->
+## The checkpoints
+PLAN.md section 13 lists the checkpoints and what Mason sees at each; section 14 has the done
+checklist; the spike's questions (if the scope has one) are in section 13 too. Read them there
+each time; don't copy them into this file, they change as the build teaches us things. Plan each
+checkpoint's steps when it starts.
+<!-- Keep only rules the XO needs that aren't in PLAN.md: e.g. "C1 → C2: pairing before any code
+can darken the desk". One or two lines each. -->
 
 ## Running a step
 1. **Builder** (fresh agent, `subagent_type: general-purpose`, `model: <build model>`,

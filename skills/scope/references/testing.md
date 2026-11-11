@@ -73,7 +73,10 @@ breaker has a target:
 - **Bad actor:** a different Tailscale account; no identity header at all; a forged header; a
   replayed command; a request to a route that shouldn't exist.
 - **Bad luck:** the process killed mid-write; the machine rebooted mid-task; the backup
-  destination unplugged.
+  destination unplugged; the process frozen, not killed (`SIGSTOP`), so its watchdog sees nothing;
+  a failure halfway through a multi-step change (the second of three steps fails); the state
+  file unwritable (disk full, read-only) right when the safety net needs it; a screen, device or
+  mount that was there at start-up gone.
 - **Bad human:** the phone locked mid-recording; the app closed and reopened; the browser's back
   button; rotating the phone mid-drag.
 

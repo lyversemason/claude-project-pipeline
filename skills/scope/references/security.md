@@ -79,7 +79,19 @@ Each level includes everything from the levels below.
 
 ### Level 3
 - **Verify identity on every single request**, not once at connection; refuse on any doubt
-  (fail closed).
+  (fail closed). On a tailnet, identity comes from asking tailscaled who the peer is (`tailscale
+  whois`, or the local API), not from trusting an HTTP header: a header is a string anyone on the
+  wire can write. "Only the paired phone" needs something only that phone holds (a stored device
+  secret from pairing); a passkey proves the person, and Apple syncs passkeys across all the
+  person's devices. A "tailnet rule" limiting a port to one device is an ACL policy edit in the
+  admin console, with the port and device named; write the exact rule into the scope.
+- **The process boundary is not a security boundary.** A 0600 local socket stops other users, not
+  another process running as the same user. If "nothing else can inject input" is a rule, say
+  what enforces it (peer credentials on the socket, a separate user for the service, or a
+  statement that same-user processes are trusted and why).
+- **Every time-based rule names its clock.** "Dropped if older than 1 s" needs to say whose
+  clock, what happens when the phone's and the desk's disagree, and which way it fails (drop
+  everything is safe; let late orders through is not).
 - **Allow-lists for actions**, not deny-lists: the set of things the remote side may do is
   enumerated; everything else is refused.
 - **Kill switch** reachable without the thing that's broken.
