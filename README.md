@@ -58,6 +58,11 @@ work keeps each step honest:
   shows how someone thinks.
 - **Honest grading.** The audit mode grades a scope A to F on a visible rubric, with the three
   fixes first and the evidence named. My global rules ban praise without a reason.
+- **A gate before code.** A finished scope isn't ready to build until two readers who never saw
+  the scoping conversation have audited it: a fresh Claude agent and OpenAI's Codex, on the same
+  rubric. Real findings get fixed, one re-audit, then stop. Two rounds at most, because chasing a
+  perfect grade on paper is how projects stall. The audit reports are tracked in the project's
+  `docs/`, so the review trail is part of the repo.
 - **State lives in plain files, not in the chat.** Each project gets a `PLAN.md` with my
   original idea in my own words (never overwritten), decisions, open questions and a
   "Where we left off" section, so any new chat can pick it up. Every idea, even a dropped

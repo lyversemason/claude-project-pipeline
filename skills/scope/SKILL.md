@@ -1,6 +1,6 @@
 ---
 name: scope
-description: Write the scope for one of Mason's planned projects, section by section, to a production-grade standard, until it's ready to build; then create the project's build skill. Use when the user types /scope (optionally with a project name), says "let's scope <project>", "pick up the plan for <project>", wants to work out what a planned project will and won't do before building, or asks how an existing scope stacks up ("/scope <project> check", "audit the scope", "does the plan meet the bar"). Stage 2 after /ideas.
+description: Write the scope for one of Mason's planned projects, section by section, to a production-grade standard, until it's ready to build; then create the project's build skill. Use when the user types /scope (optionally with a project name), says "let's scope <project>", "pick up the plan for <project>", wants to work out what a planned project will and won't do before building, or asks how an existing scope stacks up ("/scope <project> check", "audit the scope", "does the plan meet the bar"), or wants the pre-build gate run ("/scope <project> gate", "run the gate", "is it ready to build"). Stage 2 after /ideas.
 ---
 
 # Scope
@@ -39,7 +39,8 @@ or three.
 | Section 10 | `references/testing.md`: kinds, per-project table, break-it pass, when enough is enough |
 | Section 13, and step 6 (build kit) | `references/build-plan.md`: roles, sizing, models and effort, checkpoints |
 | After any section is decided, and step 6 | `references/textbook.md`: chapter and concept page format |
-| Audit mode | all of them except `textbook.md` |
+| The gate (step 7) | `references/gate.md`, and `assets/audit-prompt.md` for the readers |
+| Audit mode (step 8) | all of them except `textbook.md` |
 
 ## 1. Pick the project and open
 
@@ -47,9 +48,14 @@ or three.
 - `/scope` alone: list projects whose PLAN.md status is IDEA or PLANNING
   (`grep -l "^Status: \(IDEA\|PLANNING\)" ~/Projects/*/PLAN.md`), one line each with the
   "Where we left off" date, and ask which one.
-- `/scope <name> check`: audit mode, see step 7.
+- `/scope <name> gate`: the pre-build gate on a SCOPED project, see step 7.
+- `/scope <name> check`: audit mode, see step 8.
 - No PLAN.md (an idea that skipped /ideas): offer to make one first using the layout in the
   `ideas` skill.
+
+Say which model you're on. Scoping runs on **Fable 5.1**: the scope is where the one-way doors
+get decided, and that's where the strongest model earns its cost. If you're not on it, say so
+once and let Mason decide whether to restart; you can't switch yourself.
 
 Read the whole PLAN.md, CHANGELOG.md, `docs/decisions/` if it exists, and the project's textbook
 chapter if it exists. Then tell Mason in two or three lines where it stands and what's next.
@@ -216,11 +222,21 @@ When every section that applies is decided and Mason agrees:
      values in, and the rule for choosing them beside it.
    - **Touch only this project.** Never remove or change another project's skill link, files or
      memory, even if this project replaces it. Say what should happen to the old one; Mason does it.
-3. Set `Status: SCOPED. Ready to build when Mason says build (cd ~/Projects/<name> && claude, then /<name>).`
+3. Set `Status: SCOPED (gate pending). Run /scope <name> gate in a fresh chat before building.`
 4. Save (step 5), and finish the textbook chapter's "What I'd say in an interview" section.
-5. Say so in one line. Building is a separate step he starts himself.
+5. Say so in one line, with the gate as the next step. Building is a separate step he starts
+   himself, after the gate.
 
-## 7. Audit mode: `/scope <name> check`
+## 7. The gate: `/scope <name> gate`
+
+Two fresh readers from two vendors audit the finished scope and its kit before any code exists;
+their findings are sorted, the real ones fixed, and the scope is audited once more. Two rounds,
+hard stop. The procedure, the Codex command, the three bins and the pass rule are in
+`references/gate.md`; follow it exactly. The chat that wrote the scope doesn't run the gate:
+it would be grading its own work. When the gate passes, the Status becomes
+`SCOPED. Ready to build when Mason says build (cd ~/Projects/<name> && claude, then /<name>).`
+
+## 8. Audit mode: `/scope <name> check`
 
 For a project that's already scoped or building. Read its PLAN.md, AGENTS.md, CHANGELOG.md,
 `docs/decisions/`, `docs/build-log.md`, README, and the repo itself (tests folder, `.claude/`,
@@ -241,7 +257,7 @@ it's met", so the repo is evidence, not just the plan. Then read every reference
 
   | Grade | Means |
   |---|---|
-  | A | Every applicable section decided; bar items met or planned with the plan visible in the repo; controls match the security level; tests written and run automatically; build plan sized right. Nothing a senior engineer would send back. |
+  | A | Every applicable section decided; bar items met or planned with the plan visible in the repo; controls match the security level; tests at the stage's bar (SCOPED: kinds chosen, safety tests named, the one test command and the hook planned; BUILDING: written and running); build plan sized right. Nothing a senior engineer would send back at this stage. |
   | B | Sections present; at most three bar, security or testing items thin or missing, none of them a one-way door (data model, security model, anything others use). Ready to build with those three fixed first. |
   | C | The core (problem, what it does, how it works, phases) is decided but security or testing or running-it is missing or only in someone's head. Building now means retrofitting. |
   | D | A features list and a stack. No problem statement, bar, security or testing. |
@@ -251,8 +267,9 @@ it's met", so the repo is evidence, not just the plan. Then read every reference
   claim. Verify before you write: a claim about the repo or its history (`grep`, `git log`) is
   checked, not inferred from the plan. One wrong finding costs the report its credibility. "The three things to fix first" are exactly three; more goes under "Also".
 
-Write it to `~/Projects/<name>/docs/scope-check-<date>.md`, then offer to turn the fixes into
-scope sessions. Don't change PLAN.md in audit mode.
+Write it to `~/Projects/<name>/docs/scope-check-<date>-<reader>.md` (reader: `claude` or `codex`;
+add `-r2` for a second round), then offer to turn the fixes into scope sessions, or the gate if the
+project is SCOPED. Don't change PLAN.md in audit mode.
 
 ## Don't
 
